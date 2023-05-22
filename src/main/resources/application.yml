@@ -1,0 +1,83 @@
+# 集成MP框架的Dynamic DataSource.
+spring:
+  datasource:
+    # 单数据源配置
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://127.0.0.1:3306/software_cup_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    username: root
+    password: root4537
+    driver-class-name: com.mysql.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      initialization-mode: initialization-mode=always
+      pool-name: MasterHikariCP
+      auto-commit: true
+
+#    dynamic:
+#      primary: master #设置默认的数据源或者数据源组,默认值即为master
+#      strict: false #严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+#      datasource:
+#        master:
+#          type: com.zaxxer.hikari.HikariDataSource
+#          url: jdbc:mysql://127.0.0.1:3306/software_cup_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+#          username: root
+#          password: root4537
+#          driver-class-name: com.mysql.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
+#          hikari:
+#            maximum-pool-size: 20
+#            minimum-idle: 5
+#            connection-timeout: 30000
+#            idle-timeout: 600000
+#            max-lifetime: 1800000
+#            initialization-mode: initialization-mode=always
+#            pool-name: MasterHikariCP
+#            auto-commit: true
+#
+#        #slave:
+#        slave:
+#          type: com.zaxxer.hikari.HikariDataSource
+#          url: jdbc:mysql://127.0.0.1:3306/software_cup_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+#          username: general_user
+#          password: user4537
+#          driver-class-name: com.mysql.jdbc.Driver
+#          hikari:
+#            maximum-pool-size: 20
+#            minimum-idle: 5
+#            connection-timeout: 30000
+#            idle-timeout: 600000
+#            max-lifetime: 1800000
+#            initialization-mode: initialization-mode=always
+#            pool-name: SlaveHikariCP
+#            auto-commit: true
+
+# logback 配置
+logging:
+  config: classpath:logback.xml
+
+
+# Mybatis-plus框架配置
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto           # 主键策略
+      field-strategy: not_empty   # 字段验证策略
+      refresh-mapper: true    # 是否刷新 Mapper
+      logic-delete-field: deleted_at  # 逻辑删除字段名
+      logic-delete-value: 1   # 逻辑删除值
+
+# hikariCP 初始化配置
+hikari:
+  maximum-pool-size: 20
+  minimum-idle: 5
+  connection-timeout: 30000
+  idle-timeout: 600000
+  max-lifetime: 1800000
+  initialization-mode: initialization-mode=always
+  pool-name: MasterHikariCP
+  auto-commit: true
+
+
